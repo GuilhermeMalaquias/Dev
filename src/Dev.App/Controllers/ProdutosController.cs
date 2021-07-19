@@ -11,6 +11,7 @@ using System.IO;
 
 namespace Dev.App.Controllers
 {
+    
     public class ProdutosController : BaseController
     {
         private readonly IProdutoRepository _produtoRepository;
@@ -26,12 +27,12 @@ namespace Dev.App.Controllers
             _mapper = mapper;
         }
 
-        
+        [Route("lista-de-produtos")]
         public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosFornecedores()));
         }
-
+        [Route("detalhes-do-produto/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
 
@@ -42,13 +43,13 @@ namespace Dev.App.Controllers
 
             return View(produtoViewModel);
         }
-
+        [Route("novo-produto")]
         public async Task<IActionResult> Create()
         {
             var produtoViewModel = await PopularFornecedores(new ProdutoViewModel());
             return View(produtoViewModel);
         }
-
+        [Route("novo-produto")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProdutoViewModel produtoViewModel)
@@ -69,7 +70,7 @@ namespace Dev.App.Controllers
             
         }
 
-        // GET: Produtos/Edit/5
+        [Route("atualizar-produto/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var produtoViewModel = await ObterProduto(id);
@@ -77,7 +78,7 @@ namespace Dev.App.Controllers
 
             return View(produtoViewModel);
         }
-
+        [Route("atualizar-produto/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, ProdutoViewModel produtoViewModel)
@@ -98,7 +99,7 @@ namespace Dev.App.Controllers
                 {
                        return View(produtoViewModel);
                 }
-                  produtoAtualizacao.Imagem = imgPrefixo + produtoViewModel.ImagemUpload.FileName;
+                produtoAtualizacao.Imagem = imgPrefixo + produtoViewModel.ImagemUpload.FileName;
             }
             produtoAtualizacao.Nome = produtoViewModel.Nome;
             produtoAtualizacao.Descricao = produtoViewModel.Descricao;
@@ -109,7 +110,7 @@ namespace Dev.App.Controllers
             return RedirectToAction("Index");
 
         }
-
+        [Route("excluir-produto/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var produtoViewModel = await ObterProduto(id);
@@ -118,7 +119,7 @@ namespace Dev.App.Controllers
             return View(produtoViewModel);
         }
 
-       
+        [Route("excluir-produto/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
