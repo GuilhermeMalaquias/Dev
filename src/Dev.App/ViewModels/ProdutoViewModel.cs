@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Dev.App.Extensions;
-using Dev.Business.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace Dev.App.ViewModels
