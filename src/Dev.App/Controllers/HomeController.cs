@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace Dev.App.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
 

@@ -4,7 +4,7 @@ using Dev.Business.Models;
 
 namespace Dev.Business.Intefaces
 {
-    public interface IProdutoService
+    public interface IProdutoService : IDisposable
     {
         Task Adicionar(Produto produto);
         Task Atualizar(Produto produto);

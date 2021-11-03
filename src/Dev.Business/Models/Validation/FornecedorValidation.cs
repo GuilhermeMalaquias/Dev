@@ -8,7 +8,7 @@ using FluentValidation;
 
 namespace Dev.Business.Models.Validation
 {
-    class FornecedorValidation : AbstractValidator<Fornecedor>
+    public class FornecedorValidation : AbstractValidator<Fornecedor>
     {
         public FornecedorValidation()
         {
